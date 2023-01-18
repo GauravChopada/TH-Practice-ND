@@ -2,7 +2,7 @@
 # Problem:
 
 ## Task 1 FizzBuzz problem in JS
-    Create function which takes integer as an argument.
+    > Create function which takes integer as an argument.
     print all the numbers from 0 to N except
       1. if number divided by 3 print FIZZ
       2. if number is divided. by 5 print BUZZ 
