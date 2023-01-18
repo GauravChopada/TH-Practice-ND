@@ -11,4 +11,4 @@
     Do not %, operators  in your code.
 
 
-# solution is in .js file.
+# solution is in day1_challenge1.js file.
