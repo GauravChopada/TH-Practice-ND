@@ -29,16 +29,22 @@ const findActiveAndInactiveLink = () => {
             try {
 
                 //http get method for currentUrl
-                await axios.get(currentUrl)
+                const response = await axios.get(currentUrl)
                 //if error not found meand http request was successful. so current url is active url. 
-                //url is pushed activeLinks in array.
-                activeLinks.push(currentUrl)
+                //url is pushed activeLinks in array if statuscode is 200.
+                if (response.status == 200)
+                    activeLinks.push(currentUrl)
+                else
+                    console.error(currentUrl + " is not an active url")
 
             } catch (error) {
 
                 //if caught error ,means http request was not successful. so current url is inactive url. 
-                //url is pushed inactiveLinks in array.
-                inactiveLinks.push(currentUrl)
+                //url is pushed inactiveLinks in array if status code is 404. 
+                if (error.response.status == 404)
+                    inactiveLinks.push(currentUrl)
+                else
+                    console.error(currentUrl + " is having status code : " + error.response.status)
             }
         }
     )
