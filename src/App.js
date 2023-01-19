@@ -1,61 +1,82 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Counter from './components/Counter';
 import Total from './components/Total';
 import './App.css';
 
 function App() {
 
-  //state data for 4 counters
-  const [data, setData] = useState([
-    { id: 1, value: 0 },
-    { id: 2, value: 0 },
-    { id: 3, value: 0 },
-    { id: 4, value: 0 }
+  //state listOfCounters for multiple counter objects
+  let [listOfCounters, setlistOfCounters] = useState([
   ]);
 
-  //totalValue variable keeps total of all values from data array
-  let totalValue = 0;
+  useEffect(
+    () => {
+      //if listOfCounters is not found in sessionStorage, initial data will be loaded in listOfCounters
+      if (!sessionStorage.getItem("listOfCounters")) {
+        setlistOfCounters([
+          { id: 1, value: 0 },
+          { id: 2, value: 0 },
+          { id: 3, value: 0 },
+          { id: 4, value: 0 }
+        ])
+      } else
+        //else data available in sessionStorage will be loaded in listOfCounters
+        setlistOfCounters(JSON.parse(sessionStorage.getItem("listOfCounters")))
+    }, []
+  )
+
+  //totalValueOfCounters variable keeps total of all values from listOfCounters array
+  let totalValueOfCounters = 0;
+
+  //this method takes counterObject as input, increments value of object, reflects changes in array, stores data in sessionStorage.
+  const onIncrement = (counterObject) => {
+    const newArray = [...listOfCounters];
+    newArray[newArray.indexOf(counterObject)].value = counterObject.value + 1;
+    setlistOfCounters(newArray)
+    sessionStorage.setItem("listOfCounters", JSON.stringify(newArray))
+  }
+
+  //this method takes counterObject as input, decrements value of object, reflects changes in array, stores data in sessionStorage.
+  const onDecrement = (counterObject) => {
+    if (counterObject.value > 0) {
+      const newArray = [...listOfCounters];
+      newArray[newArray.indexOf(counterObject)].value = counterObject.value - 1;
+      setlistOfCounters(newArray)
+      sessionStorage.setItem("listOfCounters", JSON.stringify(newArray))
+    }
+  }
+
+  //this method takes counterObject, new value as input, sets new value for object and reflects changes in array.
+  const onChange = (counterObject, newValue) => {
+    if (newValue >= 0) {
+      const newArray = [...listOfCounters];
+      newArray[newArray.indexOf(counterObject)].value = newValue;
+      setlistOfCounters(newArray)
+      sessionStorage.setItem("listOfCounters", JSON.stringify(newArray))
+    }
+  }
 
   return (<div>
     {
 
-      data.map((counter) => {
-        //adds value of current counter into totalValue variable.
-        totalValue += counter.value;
+      listOfCounters.map((objectOfCounterList) => {
 
-        //this method takes old value as input, increments it and reflects changes in array.
-        // const onIncrement = (value) => {
-        //   const newArray = [...data];
-        //   newArray[newArray.indexOf(counter)].value = value + 1;
-        //   setData(newArray)
-        // }
-
-        //this method takes old value as input, decrements it and reflects changes in array.
-        // const onDecrement = (value) => {
-        //   const newArray = [...data];
-        //   newArray[newArray.indexOf(counter)].value = value - 1;
-        //   setData(newArray)
-        // }
-
-        //this method takes new value as input, sets new value for object and reflects changes in array.
-        const onChange = (value) => {
-          const newArray = [...data];
-          newArray[newArray.indexOf(counter)].value = value;
-          setData(newArray)
-        }
+        //adds value of current counter into totalValueOfCounters variable.
+        totalValueOfCounters += objectOfCounterList.value;
 
         return (
-          <Counter key={counter.id} value={counter.value}
-            // onIncrement={onIncrement}
-            // onDecrement={onDecrement}
-            onChange={onChange}
+          <Counter key={objectOfCounterList.id} object={objectOfCounterList}
+            onIncrement={onIncrement}
+            onDecrement={onDecrement}
+          // onChange={onChange}
           />
         )
       })}
 
-    {/* total component which shows value of totalValue */}
-    <Total value={totalValue} />
+    {/* total component which shows value of totalValueOfCounters */}
+    <Total value={totalValueOfCounters} />
 
   </div>);
 }
+
 export default App;
