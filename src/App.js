@@ -56,7 +56,7 @@ function App() {
     }
   }
 
-  return (<div>
+  return (<div className='body'>
     {
 
       listOfCounters.map((objectOfCounterList) => {
