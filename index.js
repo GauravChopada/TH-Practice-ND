@@ -43,8 +43,10 @@ const findActiveAndInactiveLink = () => {
                 //url is pushed inactiveLinks in array if status code is 404. 
                 if (error.response.status == 404)
                     inactiveLinks.push(currentUrl)
-                else
+                else if (error.response.status)
                     console.error(currentUrl + " is having status code : " + error.response.status)
+                else
+                    console.error("error happend for url: " + currentUrl)
             }
         }
     )
