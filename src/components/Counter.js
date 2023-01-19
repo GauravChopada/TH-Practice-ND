@@ -7,8 +7,8 @@ function Counter(props) {
             <div className="counter">
                 <b>{props.object.value}</b>
                 <div className="counter-controls">
-                    <button className="button is-danger is-small" onClick={() => props.onDecrement(props.object)}>-</button>
-                    <button className="button is-success is-small" onClick={() => props.onIncrement(props.object)}>+</button>
+                    <button className="is-danger " onClick={() => props.onDecrement(props.object)}>-</button>
+                    <button className="is-success " onClick={() => props.onIncrement(props.object)}>+</button>
                 </div>
             </div>
         </div>
