@@ -31,21 +31,13 @@
   width: 100px;
 }
 
-/* .button {
-  margin-left: 10px;
-  height: 20px;
-  width: 20px;
-} */
-
 button {
-  /* padding: 1.5em 5em; */
   margin-left: 10px;
   height: 20px;
   width: 20px;
   border: none;
   border-radius: 5px;
   color: white;
-  /* font-size: 1rem; */
   font-weight: 700;
   letter-spacing: .2rem;
   text-align: center;
@@ -75,10 +67,6 @@ button:active {
     -6px -6px 10px rgba(255, 255, 255, 0.575),
     6px 6px 8px rgba(255, 255, 255, .075),
     6px 6px 10px rgba(0, 0, 0, 0.261);
-  /* background-color: red; */
-  /* border: 0px; */
-  /* color: white; */
-  /* border-radius: 5px; */
 }
 
 .is-success {
@@ -87,10 +75,6 @@ button:active {
     -6px -6px 10px rgba(255, 255, 255, 0.575),
     6px 6px 8px rgba(255, 255, 255, .075),
     6px 6px 10px rgba(0, 0, 0, 0.23);
-  /* background-color: green; */
-  /* border: 0px; */
-  /* color: white; */
-  /* border-radius: 5px; */
 }
 
 .total {
