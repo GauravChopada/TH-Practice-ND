@@ -1,9 +1,9 @@
 //getMax method which prints maximum value of input Array.
 const getMax = (inputArray) => {
 
+    //if array is empty, throws error.
     if (inputArray.length == 0) {
-        console.log('Array is Empty.')
-        return
+        throw new Error('Array is Empty')
     }
     //this variable store first element of array as max value initially.
     let maxNumber = inputArray[0]
@@ -18,7 +18,8 @@ const getMax = (inputArray) => {
     }
 
     //print maximum number 
-    console.log(maxNumber)
+    return maxNumber
 }
 
-getMax([12])
+console.log(getMax([]))
+
